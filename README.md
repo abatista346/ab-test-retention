@@ -44,7 +44,27 @@ SQL (DuckDB), Python, pandas, SciPy, statsmodels, matplotlib
 
 ## Results
 
-Run the pipeline in [Setup](#setup) to generate this section.
+**Decision:** **Keep the gate at level 30.** Moving it to level 40 lowers 7-day retention by 0.82 pp (-4.3% relative; 95% CI -1.33 to -0.31 pp), and the result survives multiple-testing correction and a bootstrap check that makes no normality assumption.
+
+| Check | gate_30 | gate_40 | Difference (95% CI) | p (Holm) |
+|---|---|---|---|---|
+| Sample ratio (SRM, χ² vs 50/50) | 44,700 | 45,489 | control share 49.56% | p = 0.009 |
+| **Day-7 retention (primary)** | 19.02% | 18.20% | -0.82 pp (-1.33 to -0.31) | 0.0031 |
+| Day-1 retention | 44.82% | 44.23% | -0.59 pp (-1.24 to 0.06) | 0.0744 |
+| Rounds played, capped at p99 (guardrail) | 49.1 | 48.9 | -1.3 to +0.9 rounds | Mann-Whitney p = 0.050 |
+
+- **Assignment is healthy**: the split is 49.56% / 50.44% (SRM p = 0.009).
+- **Robustness**: the bootstrap 95% interval for the day-7 difference is -1.34 to -0.30 pp, and 99.9% of resamples fall below zero.
+- **Sensitivity**: at 80% power and α = 0.05 this sample detects absolute changes of ~0.74 pp in day-7 and ~0.93 pp in day-1 retention.
+
+![Retention by variant](outputs/figures/01_retention_by_variant.png)
+![Bootstrap distribution](outputs/figures/02_bootstrap_d7_difference.png)
+
+### Where the effect comes from (descriptive)
+
+Rounds played is measured *after* assignment, so splitting by it is not a randomized comparison — the gate itself can change who ends up in each bucket. The chart is useful to see *where* retention diverges, not to estimate a causal effect within a bucket.
+
+![Day-7 retention by engagement](outputs/figures/03_d7_by_engagement.png)
 
 <!-- RESULTS:END -->
 

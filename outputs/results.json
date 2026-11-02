@@ -1,0 +1,66 @@
+{
+  "data_quality": {
+    "n_rows": 90189.0,
+    "n_unique_players": 90189.0,
+    "n_duplicate_rows": 0.0,
+    "n_unknown_variant": 0.0,
+    "n_invalid_rounds": 0.0,
+    "n_missing_retention": 0.0,
+    "max_rounds": 49854.0,
+    "p99_rounds": 493.0
+  },
+  "srm": {
+    "n_control": 44700,
+    "n_treatment": 45489,
+    "control_share": 0.4956,
+    "chi2": 6.902,
+    "p_value": 0.0086,
+    "srm_detected": false
+  },
+  "primary_d7": {
+    "control_rate": 0.19020134228187918,
+    "treatment_rate": 0.18200004396667327,
+    "abs_diff": -0.008201298315205913,
+    "abs_diff_ci95": [
+      -0.013281940871914845,
+      -0.00312130268876128
+    ],
+    "rel_diff": -0.043119034896460164,
+    "z": -3.164358912748191,
+    "p_value": 0.001554249975614329,
+    "p_holm": 0.003108499951228658,
+    "bootstrap_ci95": [
+      -0.013440735764572342,
+      -0.002983087437172266
+    ],
+    "bootstrap_share_below_zero": 0.9985
+  },
+  "secondary_d1": {
+    "control_rate": 0.4481879194630872,
+    "treatment_rate": 0.44228274967574577,
+    "abs_diff": -0.005905169787341458,
+    "abs_diff_ci95": [
+      -0.012391904992707325,
+      0.000582095069752226
+    ],
+    "rel_diff": -0.01317565585974659,
+    "z": -1.7840862247974725,
+    "p_value": 0.07440965529691913,
+    "p_holm": 0.07440965529691913
+  },
+  "engagement_guardrail": {
+    "cap_p99": 493.0,
+    "mean_control_capped": 49.13583892617449,
+    "mean_treatment_capped": 48.853920728088106,
+    "diff_ci95": [
+      -1.3473836467729285,
+      0.8625964759752325
+    ],
+    "mann_whitney_p": 0.05003388795563641
+  },
+  "power": {
+    "n_per_arm": 44700,
+    "mde_d7_abs": 0.007408577234095021,
+    "mde_d1_abs": 0.009327998391775394
+  }
+}
