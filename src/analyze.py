@@ -208,7 +208,12 @@ def write_readme(r: dict, seg: pd.DataFrame) -> None:
         f"| Day-1 retention | {d1['control_rate']:.2%} | {d1['treatment_rate']:.2%} | {pp(d1['abs_diff'])} ({d1['abs_diff_ci95'][0] * 100:.2f} to {d1['abs_diff_ci95'][1] * 100:.2f}) | {d1['p_holm']:.4f} |",
         f"| Rounds played, capped at p99 (guardrail) | {e['mean_control_capped']:.1f} | {e['mean_treatment_capped']:.1f} | {e['diff_ci95'][0]:+.1f} to {e['diff_ci95'][1]:+.1f} rounds | Mann-Whitney p = {e['mann_whitney_p']:.3f} |",
         "",
-        f"- **Assignment is {'not ' if srm['srm_detected'] else ''}healthy**: the split is {srm['control_share']:.2%} / {1 - srm['control_share']:.2%} (SRM p = {srm['p_value']:.3f}).",
+        (f"- **Sample ratio mismatch detected** (p = {srm['p_value']:.4f} < 0.001): the split is {srm['control_share']:.2%} / {1 - srm['control_share']:.2%}, so assignment or logging should be investigated before trusting any result."
+         if srm["srm_detected"] else
+         f"- **Sample ratio**: the split is {srm['control_share']:.2%} / {1 - srm['control_share']:.2%} (χ² p = {srm['p_value']:.3f}). "
+         + ("That clears the standard SRM alarm threshold of p < 0.001, but it is not a perfect 50/50; in production I would confirm with the logging team that no players were dropped from one arm before relying on the result. "
+            "The imbalance is small next to the effect: re-weighting the arms to 50/50 would not change the retention rates themselves, which are computed within each arm."
+            if srm["p_value"] < 0.05 else "No sign of an assignment problem.")),
         f"- **Robustness**: the bootstrap 95% interval for the day-7 difference is {d7['bootstrap_ci95'][0] * 100:.2f} to {d7['bootstrap_ci95'][1] * 100:.2f} pp, "
         f"and {d7['bootstrap_share_below_zero']:.1%} of resamples fall below zero.",
         f"- **Sensitivity**: at 80% power and α = 0.05 this sample detects absolute changes of ~{pw['mde_d7_abs'] * 100:.2f} pp in day-7 and ~{pw['mde_d1_abs'] * 100:.2f} pp in day-1 retention.",

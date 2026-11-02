@@ -53,7 +53,7 @@ SQL (DuckDB), Python, pandas, SciPy, statsmodels, matplotlib
 | Day-1 retention | 44.82% | 44.23% | -0.59 pp (-1.24 to 0.06) | 0.0744 |
 | Rounds played, capped at p99 (guardrail) | 49.1 | 48.9 | -1.3 to +0.9 rounds | Mann-Whitney p = 0.050 |
 
-- **Assignment is healthy**: the split is 49.56% / 50.44% (SRM p = 0.009).
+- **Sample ratio**: the split is 49.56% / 50.44% (χ² p = 0.009). That clears the standard SRM alarm threshold of p < 0.001, but it is not a perfect 50/50; in production I would confirm with the logging team that no players were dropped from one arm before relying on the result. The imbalance is small next to the effect: re-weighting the arms to 50/50 would not change the retention rates themselves, which are computed within each arm.
 - **Robustness**: the bootstrap 95% interval for the day-7 difference is -1.34 to -0.30 pp, and 99.9% of resamples fall below zero.
 - **Sensitivity**: at 80% power and α = 0.05 this sample detects absolute changes of ~0.74 pp in day-7 and ~0.93 pp in day-1 retention.
 
