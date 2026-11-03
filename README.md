@@ -1,5 +1,7 @@
 # A/B Test Readout — Does Moving a Progression Gate Hurt Player Retention?
 
+[![tests](https://github.com/abatista346/ab-test-retention/actions/workflows/tests.yml/badge.svg)](https://github.com/abatista346/ab-test-retention/actions/workflows/tests.yml)
+
 > End-to-end experiment analysis in SQL (DuckDB) and Python: data-quality and sample-ratio checks, a pre-declared primary metric, two-proportion tests with confidence intervals, multiple-testing correction, bootstrap robustness checks, power analysis, and a written ship/no-ship recommendation.
 
 ## Problem
@@ -88,6 +90,8 @@ outputs/
 1. `pip install -r requirements.txt`
 2. `python src/ingest.py` (or download the Cookie Cats CSV from Kaggle into `data/raw/cookie_cats.csv`)
 3. `python src/analyze.py`
+
+Run the test suite with `pip install pytest && pytest` — it uses synthetic data, so no dataset download is needed.
 
 ## Limitations and Next Steps
 
